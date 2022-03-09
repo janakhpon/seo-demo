@@ -26,22 +26,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-
-    - name: Installing dependencies
-      run: yarn install --immutable --immutable-cache --check-cache
-
-    - name: Build and export static folder
-      run: yarn build
-      env:
-        NEXT_PUBLIC_APP_ENV=production
-      run: yarn export
-      env:
-        NEXT_PUBLIC_APP_ENV=production
-
-    - name: Create nojekyll file
-      run: touch ./out/.nojekyll
+    - run: yarn install --immutable --immutable-cache --check-cache
+    - run: yarn build
+    - run: yarn export
     
-    - name: Deploy to Github Page
+    - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
         branch: gh-pages # The branch the action should deploy to.
