@@ -13,7 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+        NEXT_PUBLIC_APP_ENV: production
+        
     strategy:
       matrix:
         node-version: [16.x]
@@ -29,6 +31,7 @@ jobs:
     - run: yarn install --immutable --immutable-cache --check-cache
     - run: yarn build
     - run: yarn export
+    - run: touch ./out/.nojekyll
     
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4.2.5
