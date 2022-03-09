@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import prisma from "../lib/prisma";
+import { withBasePath } from '../lib/helper'
 
 const Home: NextPage = ({ feed }: any) => {
   return (
@@ -22,7 +23,7 @@ const Home: NextPage = ({ feed }: any) => {
                 <Link href={`/members/${member.name.replace(/\s/g, "_")}`}>
                   <a>
                     <img
-                      src={`images/${member.image}`}
+                      src={withBasePath(`images/${member.image}`)}
                       alt={member.name}
                       className="object-cover object-center w-full h-full cursor-pointer lg:w-full lg:h-full"
                     />

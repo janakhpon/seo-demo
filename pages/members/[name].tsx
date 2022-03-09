@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import prisma from "../../lib/prisma";
+import { withBasePath } from "../../lib/helper";
 
 interface IParams extends ParsedUrlQuery {
   name: string;
@@ -16,7 +17,7 @@ const Detail: NextPage = ({ feed }: any) => {
               <img
                 alt={feed.name}
                 className="h-auto max-w-full align-middle border-none rounded shadow-lg lg:w-3/2 lg:h-4/6"
-                src={`../images/${feed.image}`}
+                src={withBasePath(`../images/${feed.image}`)}
               />
               <div className="w-full mb-6 lg:w-1/2 lg:pr-10 lg:mb-0 lg:pl-4">
                 <h3 className="text-2xl font-extrabold tracking-tight text-gray-900">

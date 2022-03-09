@@ -26,11 +26,15 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-    - run: yarn install --immutable --immutable-cache --check-cache
-    - run: yarn build
-    - run: yarn export
+
+    - name: Installing dependencies
+      run: yarn install --immutable --immutable-cache --check-cache
+      run: yarn build
+      env:
+        NEXT_PUBLIC_APP_ENV=production
+      run: yarn export
     
-    - name: Deploy 🚀
+    - name: Deploy to Github Page
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
         branch: gh-pages # The branch the action should deploy to.
