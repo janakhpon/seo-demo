@@ -29,10 +29,17 @@ jobs:
 
     - name: Installing dependencies
       run: yarn install --immutable --immutable-cache --check-cache
+
+    - name: Build and export static folder
       run: yarn build
       env:
         NEXT_PUBLIC_APP_ENV=production
       run: yarn export
+      env:
+        NEXT_PUBLIC_APP_ENV=production
+
+    - name: Create nojekyll file
+      run: touch ./out/.nojekyll
     
     - name: Deploy to Github Page
       uses: JamesIves/github-pages-deploy-action@v4.2.5
